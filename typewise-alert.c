@@ -11,9 +11,11 @@ BreachType (*sender_selector[])(BreachType) =    //pointers to functions
 };
 
 BreachType inferBreach(double value, double lowerLimit, double upperLimit) {
-  BreachType inferbreach;
-  inferbreach = ((value - lowerLimit) < 0) ? TOO_LOW:NORMAL;
-  if(inferbreach == NORMAL && (value - upperLimit) > 0) {
+  BreachType inferbreach = NORMAL;
+  if(value < lowerLimit) {
+    inferbreach = TOO_LOW;
+  }
+  if(value > upperLimit) {
     inferbreach = TOO_HIGH;
   }
   return inferbreach;
